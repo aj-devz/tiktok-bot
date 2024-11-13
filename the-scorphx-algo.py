@@ -58,4 +58,15 @@ if mode in [1, 2, 3, 4]:
         global metric2
         while True:
             time_elapsed = strftime('%H:%M:%S', gmtime(time() - start))
-            if
+            if name == 'nt':
+                system(f'title PROGRAM_NAME ^| Metric 2: {beautify(metric2)} ^| Elapsed Time: {time_elapsed}')
+            sleep(1)  # Avoid high CPU usage
+
+    # Starting threading based on selected mode
+    if mode == 1:
+        threading.Thread(target=update_title1, daemon=True).start()
+    elif mode == 2:
+        threading.Thread(target=update_title2, daemon=True).start()
+
+else:
+    print("Invalid option. Please select a valid mode.")
